@@ -36,37 +36,7 @@ let configData = {
         "color": "#2F454E"
     }
 }
-function domReady() {
-    const cards = Object.keys(configData);
-    renderCards(cards);
-}
-function renderCards(cards) {
-    const leftContentDiv = document.querySelector("#left-content");
-    leftContentDiv.innerHTML = "";
-    cards.forEach(key => {
-        let newDiv = document.createElement("div");
-        newDiv.className += "square";
-        newDiv.style = "background:" + configData[key].color + ";";
-        let span = document.createElement("span");
-        span.textContent = configData[key].value;
-        span.className += "card-content";
-        newDiv.appendChild(span);
-        leftContentDiv.appendChild(newDiv);
-    });
-}
-function shuffle() {
-    let cards = Object.keys(configData);
-    cards = cards.sort(randomSort);
-    renderCards(cards);
-}
-function sort() {
-    let cards = Object.keys(configData);
-    cards = cards.sort();
-    renderCards(cards);
-}
-function randomSort(val1, val2) {
-    return 0.5 - Math.random();
-}
+
 if (
     document.readyState === "complete" ||
     (document.readyState !== "loading" && !document.documentElement.doScroll)
@@ -74,4 +44,49 @@ if (
     domReady();
 } else {
     document.addEventListener("DOMContentLoaded", domReady);
+}
+
+function domReady() {
+    const cards = Object.keys(configData);
+    createCards(cards);
+}
+
+function createCards(cards) {
+    const leftContentDiv = document.querySelector("#left-content");
+    leftContentDiv.innerHTML = "";
+    cards.forEach(key => {
+        let newDiv = document.createElement("div");
+        newDiv.className += "square";
+        newDiv.style.backgroundColor = configData[key].color;
+        let span = document.createElement("span");
+        span.textContent = configData[key].value;
+        span.className += "card-content";
+        newDiv.appendChild(span);
+        leftContentDiv.appendChild(newDiv);
+    });
+}
+
+function rerenderCards(cards) {
+    const leftContentDiv = document.querySelector("#left-content");
+    const cardsDOM = leftContentDiv.children;
+    cards.forEach((key, index) => {
+        cardsDOM[index].style.backgroundColor = configData[key].color;
+        cardsDOM[index].children[0].textContent = configData[key].value;
+    });
+}
+
+function shuffle() {
+    let cards = Object.keys(configData);
+    cards = cards.sort(randomSort);
+    rerenderCards(cards);
+}
+
+function sort() {
+    let cards = Object.keys(configData);
+    cards = cards.sort();
+    rerenderCards(cards);
+}
+
+function randomSort(val1, val2) {
+    return 0.5 - Math.random();
 }
