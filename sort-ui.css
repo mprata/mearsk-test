@@ -80,8 +80,8 @@ section {
     }
     section {
         flex-direction: column-reverse;
-        height: 85%;
         width: 100%;
+        height: auto;
         border-top: none;
         align-items: center;
         justify-content: center;
@@ -89,18 +89,19 @@ section {
     .left-content {
         flex-direction: column;
         width: 100%;
-        height: 100%;
+        height: auto;
         box-sizing: border-box;
         flex-wrap: nowrap;
         align-items: center;
         justify-content: space-evenly;
+        gap: 10px;
     }
     .right-content {
         flex-direction: row;
         align-items: initial;
         justify-content: center;
         width: 100%;
-        height: 12%;
+        height: auto;
         box-sizing: border-box;
     }
     .square {
@@ -109,14 +110,19 @@ section {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 10%;
+        overflow: hidden;
     }
     .card-content {
-        color: #FFFFFF;
+        color: #000000;
         font-size: 2rem;
+        width: 100%;
+        background-color: #EFEFEF;
+        text-align: center;
+        margin-right: -20px;
     }
     .buttons {
         width: 25%;
         height: 40px;
+        margin: 20px 10px 20px 10px;
     }
 }
